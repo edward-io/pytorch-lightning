@@ -15,7 +15,7 @@ import functools
 import os
 import traceback
 from contextlib import contextmanager
-from typing import Optional, Type
+from typing import Callable, Optional, Type
 
 import pytest
 
@@ -79,7 +79,7 @@ def init_checkpoint_callback(logger):
     return checkpoint
 
 
-def pl_multi_process_test(func):
+def pl_multi_process_test(func: Callable) -> Callable:
     """Wrapper for running multi-processing tests."""
 
     @functools.wraps(func)

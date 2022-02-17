@@ -25,6 +25,10 @@ from pytorch_lightning.plugins.environments.lightning_environment import find_fr
 from pytorch_lightning.trainer.connectors.signal_connector import SignalConnector
 from pytorch_lightning.utilities.imports import _IS_WINDOWS, _TORCH_GREATER_EQUAL_1_8
 from tests import _PATH_DATASETS
+from _pytest.doctest import DoctestItem
+from _pytest.python import Function
+from _pytest.unittest import TestCaseFunction
+from typing import List, Union
 
 
 @pytest.fixture(scope="session")
@@ -169,7 +173,7 @@ def single_process_pg():
         os.environ.update(orig_environ)
 
 
-def pytest_collection_modifyitems(items):
+def pytest_collection_modifyitems(items: List[Union[Function, DoctestItem, TestCaseFunction]]) -> None:
     # filter out special tests
     if os.getenv("PL_RUN_STANDALONE_TESTS", "0") == "1":
         items[:] = [

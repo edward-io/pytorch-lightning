@@ -26,6 +26,7 @@ from pytorch_lightning.utilities import _FAIRSCALE_FULLY_SHARDED_AVAILABLE
 from pytorch_lightning.utilities.enums import _StrategyType, PrecisionType
 from pytorch_lightning.utilities.exceptions import MisconfigurationException
 from pytorch_lightning.utilities.types import STEP_OUTPUT
+from pytorch_lightning.plugins.precision.precision_plugin import PrecisionPlugin
 
 if _FAIRSCALE_FULLY_SHARDED_AVAILABLE:
     from fairscale.nn import default_auto_wrap_policy, enable_wrap
@@ -54,7 +55,7 @@ class DDPFullyShardedStrategy(DDPStrategy):
         cluster_environment: Optional[ClusterEnvironment] = None,
         checkpoint_io: Optional[CheckpointIO] = None,
         precision_plugin: Optional[PrecisionPlugin] = None,
-    ):
+    ) -> None:
         """Plugin for Fully Sharded Data Parallel provided by FairScale.
 
         Full Sharded Training shards the entire model across all available GPUs, allowing you to scale model

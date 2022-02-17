@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Custom dataloaders for testing."""
+from torch.utils.data.dataloader import DataLoader
 
 
 class CustomInfDataloader:
-    def __init__(self, dataloader):
+    def __init__(self, dataloader: DataLoader) -> None:
         self.dataloader = dataloader
         self.iter = iter(dataloader)
         self.count = 0

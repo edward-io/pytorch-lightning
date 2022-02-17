@@ -25,6 +25,7 @@ from pytorch_lightning.utilities.apply_func import apply_to_collection
 from pytorch_lightning.utilities.enums import _StrategyType
 from pytorch_lightning.utilities.model_helpers import is_overridden
 from pytorch_lightning.utilities.types import _METRIC_COLLECTION, STEP_OUTPUT
+from pytorch_lightning.plugins.precision.precision_plugin import PrecisionPlugin
 
 
 class DataParallelStrategy(ParallelStrategy):
@@ -39,7 +40,7 @@ class DataParallelStrategy(ParallelStrategy):
         parallel_devices: Optional[List[torch.device]] = None,
         checkpoint_io: Optional[CheckpointIO] = None,
         precision_plugin: Optional[PrecisionPlugin] = None,
-    ):
+    ) -> None:
         super().__init__(
             accelerator=accelerator,
             parallel_devices=parallel_devices,

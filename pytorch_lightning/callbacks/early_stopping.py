@@ -99,7 +99,7 @@ class EarlyStopping(Callback):
         stopping_threshold: Optional[float] = None,
         divergence_threshold: Optional[float] = None,
         check_on_train_epoch_end: Optional[bool] = None,
-    ):
+    ) -> None:
         super().__init__()
         self.monitor = monitor
         self.min_delta = min_delta

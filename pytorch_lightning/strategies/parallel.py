@@ -26,6 +26,7 @@ from pytorch_lightning.plugins.io.checkpoint_plugin import CheckpointIO
 from pytorch_lightning.plugins.precision import PrecisionPlugin
 from pytorch_lightning.strategies.strategy import Strategy
 from pytorch_lightning.utilities.distributed import all_gather_ddp_if_available, ReduceOp
+from pytorch_lightning.plugins.precision.precision_plugin import PrecisionPlugin
 
 
 class ParallelStrategy(Strategy, ABC):
@@ -38,7 +39,7 @@ class ParallelStrategy(Strategy, ABC):
         cluster_environment: Optional[ClusterEnvironment] = None,
         checkpoint_io: Optional[CheckpointIO] = None,
         precision_plugin: Optional[PrecisionPlugin] = None,
-    ):
+    ) -> None:
         super().__init__(accelerator=accelerator, checkpoint_io=checkpoint_io, precision_plugin=precision_plugin)
         self.parallel_devices = parallel_devices
         self.cluster_environment = cluster_environment

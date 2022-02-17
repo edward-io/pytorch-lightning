@@ -13,7 +13,7 @@
 # limitations under the License.
 import os
 import sys
-from typing import Optional
+from typing import Type, Optional
 
 import pytest
 import torch
@@ -33,6 +33,7 @@ from pytorch_lightning.utilities import (
     _TORCH_QUANTIZE_AVAILABLE,
     _TPU_AVAILABLE,
 )
+from _pytest.mark.structures import MarkDecorator
 
 try:
     from horovod.common.util import nccl_built
@@ -53,7 +54,7 @@ class RunIf:
     """
 
     def __new__(
-        self,
+        self: Type[RunIf],
         *args,
         min_gpus: int = 0,
         min_torch: Optional[str] = None,
@@ -76,8 +77,8 @@ class RunIf:
         omegaconf: bool = False,
         slow: bool = False,
         bagua: bool = False,
-        **kwargs,
-    ):
+        **kwargs
+    ) -> MarkDecorator:
         """
         Args:
             *args: Any :class:`pytest.mark.skipif` arguments.

@@ -34,6 +34,7 @@ from pytorch_lightning.utilities import _HYDRA_EXPERIMENTAL_AVAILABLE, _OMEGACON
 from pytorch_lightning.utilities.exceptions import MisconfigurationException
 from tests.helpers import BoringModel, RandomDataset
 from tests.helpers.runif import RunIf
+from typing import Callable, Dict, Union
 
 if _HYDRA_EXPERIMENTAL_AVAILABLE:
     from hydra.experimental import compose, initialize
@@ -46,12 +47,12 @@ if _OMEGACONF_AVAILABLE:
 class SaveHparamsModel(BoringModel):
     """Tests that a model can take an object."""
 
-    def __init__(self, hparams):
+    def __init__(self, hparams: Dict[str, Union[int, str]]) -> None:
         super().__init__()
         self.save_hyperparameters(hparams)
 
 
-def decorate(func):
+def decorate(func: Callable) -> Callable:
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         return func(*args, **kwargs)
@@ -673,13 +674,13 @@ def test_ignore_args_list_hparams(tmpdir, ignore):
 
 
 class IgnoreAllParametersModel(BoringModel):
-    def __init__(self, arg1, arg2, arg3):
+    def __init__(self, arg1: int, arg2: int, arg3: int) -> None:
         super().__init__()
         self.save_hyperparameters(ignore=("arg1", "arg2", "arg3"))
 
 
 class NoParametersModel(BoringModel):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.save_hyperparameters()
 
@@ -753,7 +754,7 @@ class DataModuleWithoutHparams(LightningDataModule):
 
 
 class DataModuleWithHparams(LightningDataModule):
-    def __init__(self, hparams):
+    def __init__(self, hparams: Dict[str, str]) -> None:
         super().__init__()
         self.save_hyperparameters(hparams)
 

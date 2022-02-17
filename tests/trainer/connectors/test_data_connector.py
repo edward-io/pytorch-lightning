@@ -25,7 +25,7 @@ from tests.helpers.boring_model import RandomDataset
 
 
 class NoDataLoaderModel(BoringModel):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.train_dataloader = None
         self.val_dataloader = None

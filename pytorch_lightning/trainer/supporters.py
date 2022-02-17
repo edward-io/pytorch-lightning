@@ -226,7 +226,7 @@ class CombinedDataset:
 
     COMPUTE_FUNCS = {"min_size": min, "max_size_cycle": max}
 
-    def __init__(self, datasets: Union[Sequence, Mapping], mode: str = "min_size"):
+    def __init__(self, datasets: Union[Sequence, Mapping], mode: str = "min_size") -> None:
         """
         Args:
             datasets: a sequence/mapping datasets. Can be a collections of torch.utils.Dataset,
@@ -330,7 +330,7 @@ class CombinedLoader:
 
     SUPPORTED_MODES = ("min_size", "max_size_cycle")
 
-    def __init__(self, loaders: Any, mode: str = "min_size"):
+    def __init__(self, loaders: Any, mode: str = "min_size") -> None:
         """
         Args:
             loaders: the loaders to sample from. Can be all kind of collection
